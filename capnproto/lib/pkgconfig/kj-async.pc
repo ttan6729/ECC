@@ -1,0 +1,11 @@
+prefix=/projects/NGSData/human/ECC/capnproto
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: KJ Async Framework Library
+Description: Basic utility library called KJ (async part)
+Version: 0.7.0
+Libs: -L${libdir} -lkj-async -pthread  -lpthread 
+Requires: kj = 0.7.0
+Cflags: -I${includedir} -pthread  

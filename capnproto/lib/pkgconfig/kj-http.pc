@@ -1,0 +1,11 @@
+prefix=/projects/NGSData/human/ECC/capnproto
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: KJ HTTP Library
+Description: Basic utility library called KJ (HTTP part)
+Version: 0.7.0
+Libs: -L${libdir} -lkj-http -pthread  -lpthread 
+Requires: kj-async = 0.7.0
+Cflags: -I${includedir} -pthread  

@@ -1,0 +1,11 @@
+prefix=/projects/NGSData/human/ECC/capnproto
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: KJ Test Framework
+Description: Basic utility library called KJ (test part)
+Version: 0.7.0
+Libs: -L${libdir} -lkj-test -pthread  -lpthread 
+Requires: kj = 0.7.0
+Cflags: -I${includedir} -pthread  

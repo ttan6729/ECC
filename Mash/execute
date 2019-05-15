@@ -1,0 +1,4 @@
+#./configure --with-capnp=/projects/NGSData/human/ECC/capnproto
+rm mash
+make
+./mash dist hg38_chr1.fa hg19_chr1.fa
