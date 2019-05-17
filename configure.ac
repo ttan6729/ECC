@@ -35,7 +35,7 @@ fi
 
 CPPFLAGS="-I$with_capnp/include -std=c++14"
 
-AC_CHECK_HEADER($with_capnp/include/capnp/common.h, [result=1], [result=0])
+AC_CHECK_HEADER(capnp/common.h, [result=1], [result=0])
 
 if test $result == 0
 then
