@@ -97,6 +97,8 @@ void Compressor::cluster_compress()
 	chdir(current_directory);
 	sprintf(cmd,"mv %s/%s.tar ./",res_folder,res_folder);
 	system(cmd);
+	sprintf(cmd,"rm -rf %s",res_folder);
+	system(cmd);
 }
 
 void Compressor::ref_compress()

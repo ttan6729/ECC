@@ -4,7 +4,7 @@
 #include "clustering.h"
 #include "hirgc-compressor.h"
 #include "hirgc-decompressor.h"
-
+#include "../libbsc/bsc.h"
 
 
 int generate_src_file(char *result,std::vector<string> file_list);
@@ -17,11 +17,11 @@ static void show_usage()
 	printf("v2.0 \n"
 		   "./ECC p -r result_name -s src_list -t thread_number for reference-target pair selectoin\n"
 		   "./ECC c -r result_name -s src_list -t thread_number for reference-target pair selectoin and compress data via hirgc\n"
-		   "./ECC d -s src_file for decompression\n"
+		   "./ECC d src_file for decompression\n"
 		   "Examples:\n"
 		   "./ECC p -r my_archive -s file_list.txt -t 4\n"
 		   "./ECC p -r my_archive -s file_list.txt -t 4\n"
-		   "./ECC d -s my_archive\n"
+		   "./ECC d my_archive\n"
 		    );
 }
 
@@ -208,7 +208,7 @@ void decompress_mode(int argc, char *argv[])
 	std::vector<string> tar_list;
 	std::vector<string> refs;
 	struct stat stat_buffer; 
-	if ( stat ((src_name+"_ref.bsc").c_str(), &stat_buffer) != 0)
+	if ( stat ((src_name+"_ref").c_str(), &stat_buffer) != 0)
 	{
 		printf("error, %s not found \n", (src_name+"_ref").c_str() );
 		exit(0);
@@ -232,11 +232,12 @@ void decompress_mode(int argc, char *argv[])
 	}
 
 
-	spring::bsc::BSC_decompress( (src_name+"_ref.bsc").c_str(), (src_name+"/"+ref_list[0]).c_str() );
+	spring::bsc::BSC_decompress( (src_name+"_ref").c_str(), (src_name+"/"+ref_list[0]).c_str() );
 	chdir(src_name.c_str());
 	for (int i = 0; i < refs.size(); i++)
 	{
 		spring::bsc::BSC_decompress( (refs[i]+"_ref.tar.bsc").c_str(), (refs[i]+".tar").c_str() );
+		remove((refs[i]+"_ref.tar.bsc").c_str());
 		sprintf(cmd,"tar -xvf %s.tar",refs[i].c_str());
 		system(cmd);
 		sprintf(cmd,"rm -r %s.tar",refs[i].c_str());

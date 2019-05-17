@@ -583,7 +583,7 @@ echo 'BEGIN {' >"$ac_tmp/subs1.awk" &&
 cat >>"$ac_tmp/subs1.awk" <<\_ACAWK &&
 S["LTLIBOBJS"]=""
 S["LIBOBJS"]=""
-S["capnp"]="/projects/NGSData/human/ECC/capnproto/"
+S["capnp"]="capnproto"
 S["amcppflags"]=""
 S["mathinc"]="/usr/local//include"
 S["mathlib"]="-L/usr/local//lib -lgsl -lgslcblas"

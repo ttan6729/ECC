@@ -1,5 +1,5 @@
-CXXFLAGS += -O3 -std=c++14 -Isrc -Ilibbsc -Ilibbsc/libbsc/libbsc -Ilibbsc/libbsc/platform -IMash/src  -I@capnp@/include -I@mathinc@
-CPPFLAGS += @amcppflags@
+CXXFLAGS += -O3 -std=c++14 -Isrc -Ilibbsc -Ilibbsc/libbsc/libbsc -Ilibbsc/libbsc/platform -IMash/src  -Icapnproto/include -I/usr/local//include
+CPPFLAGS += 
 
 UNAME_S=$(shell uname -s)
 
@@ -58,7 +58,7 @@ OBJECTS=$(src1:.cpp=.o) $(src2:.cpp=.o) Mash/src/mash/capnp/MinHash.capnp.o
 all : ECC libmash.a
 
 ECC : libmash.a Mash/src/mash/memcpyWrap.o
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o ECC Mash/src/mash/memcpyWrap.o libmash.a @capnp@/lib/libcapnp.a @capnp@/lib/libkj.a @mathlib@ -lstdc++ -lz -lm -lpthread
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o ECC Mash/src/mash/memcpyWrap.o libmash.a capnproto/lib/libcapnp.a capnproto/lib/libkj.a -L/usr/local//lib -lgsl -lgslcblas -lstdc++ -lz -lm -lpthread
 
 libmash.a : $(OBJECTS)
 	ar -cr libmash.a $(OBJECTS)
@@ -76,17 +76,17 @@ Mash/src/mash/memcpyWrap.o : Mash/src/mash/memcpyWrap.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 Mash/src/mash/capnp/MinHash.capnp.c++ Mash/src/mash/capnp/MinHash.capnp.h : Mash/src/mash/capnp/MinHash.capnp
-	cd Mash/src/mash/capnp;export PATH=@capnp@/bin/:${PATH};capnp compile -I @capnp@/include -oc++ MinHash.capnp
+	cd Mash/src/mash/capnp;export PATH=capnproto/bin/:${PATH};capnp compile -I capnproto/include -oc++ MinHash.capnp
 
 install : mash
-	mkdir -p @prefix@/bin/
-	mkdir -p @prefix@/lib/
-	mkdir -p @prefix@/include/
-	mkdir -p @prefix@/include/mash
-	mkdir -p @prefix@/include/mash/capnp
-	cp `pwd`/mash @prefix@/bin/
-	cp `pwd`/libmash.a @prefix@/lib/
-	cp `pwd`/src/mash/*.h @prefix@/include/mash/
+	mkdir -p /usr/local/bin/
+	mkdir -p /usr/local/lib/
+	mkdir -p /usr/local/include/
+	mkdir -p /usr/local/include/mash
+	mkdir -p /usr/local/include/mash/capnp
+	cp `pwd`/mash /usr/local/bin/
+	cp `pwd`/libmash.a /usr/local/lib/
+	cp `pwd`/src/mash/*.h /usr/local/include/mash/
 
 clean :
 	-rm -f ECC
