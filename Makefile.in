@@ -90,6 +90,7 @@ install : mash
 
 clean :
 	-rm -f ECC
+	-rm -f libmash.a
 	-rm -f src/*.o
 	-rm -f Mash/src/mash/capnp/*.o
 	-rm -f Mash/src/mash/*.o
