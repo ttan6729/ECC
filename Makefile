@@ -91,9 +91,10 @@ install : mash
 clean :
 	-rm -f ECC
 	-rm -f src/*.o
-	-rm -f src/mash/capnp/*.o
-	-rm -f src/mash/capnp/*.c++
-	-rm -f src/mash/capnp/*.h
+	-rm -f Mash/src/mash/capnp/*.o
+	-rm -f Mash/src/mash/*.o
+#	-rm -f src/mash/capnp/*.c++
+#	-rm -f src/mash/capnp/*.h
 	-rm -f libbsc/*.o
 	-rm -f libbsc/adler32/*.o
 	-rm -f libbsc/bwt/divsufsort/*.o
